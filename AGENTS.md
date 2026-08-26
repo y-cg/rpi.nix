@@ -69,4 +69,9 @@ is harmless.
   hash, so it is **not in any binary cache and is rebuilt from source under
   emulation** on the first `toplevel` build (slow, but mostly file-copying, not
   compilation). Subsequent builds hit the local `/nix/store`.
+- Vendor `linux_rpi` comes from `nixos-raspberrypi.cachix.org`, not
+  `cache.nixos.org`. Keep the flake input on a pin that still has the kernel
+  in that cache (stale `nixos-26.05` pins age out). Do not re-enable
+  `boot.supportedFilesystems.zfs` unless you need it: `sd-image`/`profiles.base`
+  defaults it on for aarch64 and that pulls an uncached `zfs-kernel` build.
 - Do not commit the `result` symlink created by `nix build`.

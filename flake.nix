@@ -9,8 +9,11 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Track main: the nixos-26.05 branch is frozen on a July pin whose
+    # linux_rpi4 build has already aged out of nixos-raspberrypi.cachix.org.
+    # main (and develop) still have substitutable vendor kernels.
     nixos-raspberrypi = {
-      url = "github:nvmd/nixos-raspberrypi/nixos-26.05";
+      url = "github:nvmd/nixos-raspberrypi/main";
     };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";
