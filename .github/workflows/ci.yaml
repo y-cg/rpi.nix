@@ -23,23 +23,23 @@ jobs:
         uses: nix-community/cache-nix-action@v7
         with:
           # restore and save a cache using this key
-          primary-key: nix-ubuntu-24.04-arm-rpi-${{ hashFiles('**/*.nix') }}
+          primary-key: nix-ubuntu-24.04-arm-rpi-${{ hashFiles('**/*.nix', 'flake.lock') }}
           # if there's no cache hit, restore a cache by this prefix
           restore-prefixes-first-match: nix-ubuntu-24.04-arm-rpi
-          # collect garbage until Nix store size (in bytes) is at most this number
-          # before trying to save a new cache
-          gc-max-store-size-linux: 1073741824
+          # Keep enough of the store to retain linux_rpi across runs (~8 GiB).
+          # The previous 1 GiB cap threw away the vendor kernel after each job.
+          gc-max-store-size-linux: 8589934592
           # do purge caches
           purge: true
           # purge all versions of the cache
-          purge-prefixes: cache-ubuntu-24.04-arm-rpi
+          purge-prefixes: nix-ubuntu-24.04-arm-rpi
           # created more than this number of seconds ago relative to the start of the `Post Restore` phase
           purge-created: 0
           # except the version with the `primary-key`, if it exists
           purge-primary-key: never
 
       - name: Build TopLevel / rpi
-        run: nix build .#nixosConfigurations.rpi.config.system.build.toplevel
+        run: nix --accept-flake-config build .#nixosConfigurations.rpi.config.system.build.toplevel
 
   build-rpi4-image:
     runs-on: ubuntu-24.04-arm
@@ -55,20 +55,19 @@ jobs:
         uses: nix-community/cache-nix-action@v7
         with:
           # restore and save a cache using this key
-          primary-key: nix-ubuntu-24.04-arm-rpi4-image-${{ hashFiles('**/*.nix') }}
+          primary-key: nix-ubuntu-24.04-arm-rpi4-image-${{ hashFiles('**/*.nix', 'flake.lock') }}
           # if there's no cache hit, restore a cache by this prefix
           restore-prefixes-first-match: nix-ubuntu-24.04-arm-rpi4-image
-          # collect garbage until Nix store size (in bytes) is at most this number
-          # before trying to save a new cache
-          gc-max-store-size-linux: 1073741824
+          # Keep enough of the store to retain linux_rpi across runs (~8 GiB).
+          gc-max-store-size-linux: 8589934592
           # do purge caches
           purge: true
           # purge all versions of the cache
-          purge-prefixes: cache-ubuntu-24.04-arm-rpi4-image
+          purge-prefixes: nix-ubuntu-24.04-arm-rpi4-image
           # created more than this number of seconds ago relative to the start of the `Post Restore` phase
           purge-created: 0
           # except the version with the `primary-key`, if it exists
           purge-primary-key: never
 
       - name: Build SD image
-        run: nix build .#rpi4-image
+        run: nix --accept-flake-config build .#rpi4-image
