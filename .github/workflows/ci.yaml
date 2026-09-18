@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-toplevel:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-26.04-arm
 
     steps:
       - name: Checkout tree
@@ -42,7 +42,7 @@ jobs:
         run: nix --accept-flake-config build .#nixosConfigurations.rpi.config.system.build.toplevel
 
   build-rpi4-image:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-26.04-arm
 
     steps:
       - name: Checkout tree
