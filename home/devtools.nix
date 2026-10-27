@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, ... }:
+{ pkgs, pkgsNightly, ... }:
 {
   # The home.packages option allows you to install Nix packages into your
   # environment.

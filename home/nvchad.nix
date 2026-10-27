@@ -1,9 +1,9 @@
 { inputs, pkgs, ... }:
 let
-  pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  pkgsNightly = inputs.nixpkgs-nightly.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
 {
-  home.packages = with pkgs-unstable; [
+  home.packages = with pkgsNightly; [
     tombi
     prettier
   ];

@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  sealed,
   ...
 }:
 
@@ -12,11 +11,15 @@ let
   # auto-submit. Keep the command $-free — run-shell expands $var as env vars.
   copyPaneId = "printf 'My terminal is tmux pane %s; operate on it via the tmux CLI.' '#{pane_id}' | pbcopy && tmux display-message 'Pane prompt copied'";
 
-  tmuxConfig = sealed.replacePlaceholders {
+  placeholders = {
     "@copyPaneId@" = copyPaneId;
     "@tmuxJump@" = "${pkgs.tmuxPlugins.jump}/share/tmux-plugins/jump/scripts/tmux-jump.sh";
     "@zsh@" = lib.getExe pkgs.zsh;
-  } (builtins.readFile ./tmux.conf);
+  };
+
+  tmuxConfig = builtins.replaceStrings (builtins.attrNames placeholders) (builtins.attrValues placeholders) (
+    builtins.readFile ./tmux.conf
+  );
 in
 {
   programs.tmux = {
