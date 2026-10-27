@@ -1,6 +1,6 @@
 {
   imports = [
     ./home-assistant
-    ./adguard.nix
+    ./adguard
   ];
 }
