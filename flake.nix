@@ -2,16 +2,13 @@
   description = "YCG's NixOS (Raspberry Pi)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2605.*.tar.gz";
+    nixpkgs-unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "https://flakehub.com/f/nix-community/home-manager/0.2605.*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Track main: the nixos-26.05 branch is frozen on a July pin whose
-    # linux_rpi4 build has already aged out of nixos-raspberrypi.cachix.org.
-    # main (and develop) still have substitutable vendor kernels.
     nixos-raspberrypi = {
       url = "github:nvmd/nixos-raspberrypi/main";
     };
