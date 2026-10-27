@@ -1,9 +1,8 @@
 { pkgsNightly, ... }:
 {
   services.tailscale = {
-    enable = false; # bug, enable later
+    enable = true;
     package = pkgsNightly.tailscale;
-    authKeyFile = "/etc/tailscale/key";
     openFirewall = true;
   };
 }

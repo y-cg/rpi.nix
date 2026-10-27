@@ -1,15 +1,16 @@
 { lib, ... }:
 let
   port = 3003;
+  dnsPort = 1053;
 in
 {
   networking.firewall.allowedTCPPorts = [
-    53
+    dnsPort
     port # adguard home web
   ];
 
   networking.firewall.allowedUDPPorts = [
-    53
+    dnsPort
   ];
 
   services.adguardhome = {
@@ -18,9 +19,14 @@ in
     port = port;
     settings = {
       dns = {
+        port = dnsPort;
         upstream_dns = [
-          "9.9.9.9#dns.quad9.net"
-          "149.112.112.112#dns.quad9.net"
+          "tls://dns.quad9.net"
+        ];
+        # Used to resolve the DoT upstream hostname above
+        bootstrap_dns = [
+          "9.9.9.9"
+          "149.112.112.112"
         ];
       };
       filtering = {
