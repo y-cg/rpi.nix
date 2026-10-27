@@ -41,8 +41,11 @@
   systemd.network = {
     enable = true;
     networks."10-lan" = {
-      # Match any ethernet device (eth0 / end0 / ...) instead of a fixed name
-      matchConfig.Type = "ether";
+      # Only the onboard NIC (bcmgenet).
+      matchConfig = {
+        Type = "ether";
+        Driver = "bcmgenet";
+      };
       address = [ "192.168.3.16/24" ];
       # surge gateway
       gateway = [ "192.168.3.8" ];
