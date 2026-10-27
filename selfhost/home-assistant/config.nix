@@ -1,11 +1,12 @@
 {
-  # pkgs-unstable from specialArgs (allowUnfree); HA overlay uses the same input
   pkgs-unstable,
   ...
 }:
 {
   services.home-assistant = {
     enable = true;
+    # Use unstable HA so it matches the custom components below
+    package = pkgs-unstable.home-assistant;
     extraComponents = [
       # Components required to complete the onboarding
       "analytics"
@@ -25,8 +26,6 @@
       "ffmpeg"
       "zeroconf"
     ];
-    # home-assistant comes from nixpkgs-unstable via overlay; keep custom
-    # components on the same input so Python deps match
     customComponents = [
       pkgs-unstable.home-assistant-custom-components.xiaomi_home
     ];

@@ -18,9 +18,6 @@ let
       pkgs-unstable = import nixpkgs-unstable {
         system = meta.system;
         config.allowUnfree = true;
-        overlays = [
-          (import ../overlays/paho-mqtt.nix)
-        ];
       };
       specialArgs = {
         inherit
