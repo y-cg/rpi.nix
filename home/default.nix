@@ -7,10 +7,10 @@
     ./starship.nix
     ./git.nix
     ./ssh.nix
-    ./zsh.nix
     ./nvchad.nix
     ./tv.nix
     ./pi.nix
     ./tmux
+    ./zsh
   ];
 }
