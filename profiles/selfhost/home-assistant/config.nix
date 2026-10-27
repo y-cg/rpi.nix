@@ -1,12 +1,12 @@
 {
-  pkgs-unstable,
+  pkgsNightly,
   ...
 }:
 {
   services.home-assistant = {
     enable = true;
-    # Use unstable HA so it matches the custom components below
-    package = pkgs-unstable.home-assistant;
+    # Use nightly HA so it matches the custom components below
+    package = pkgsNightly.home-assistant;
     extraComponents = [
       # Components required to complete the onboarding
       "analytics"
@@ -27,7 +27,7 @@
       "zeroconf"
     ];
     customComponents = [
-      pkgs-unstable.home-assistant-custom-components.xiaomi_home
+      pkgsNightly.home-assistant-custom-components.xiaomi_home
     ];
     config = {
       # Includes dependencies for a basic setup

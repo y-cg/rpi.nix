@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2605.*.tar.gz";
-    nixpkgs-unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+    nixpkgs-nightly.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
       url = "https://flakehub.com/f/nix-community/home-manager/0.2605.*.tar.gz";
@@ -39,7 +39,7 @@
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        ./flakes/nixosConfig.nix
+        ./flakes/nixos.nix
         ./flakes/image.nix
       ];
     };

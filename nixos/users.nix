@@ -1,9 +1,9 @@
-{ pkgs, meta, ... }:
+{ pkgs, ... }:
 {
   security.sudo.wheelNeedsPassword = false;
-  users.users."${meta.whoami}" = {
+  users.users.ycg = {
     createHome = true;
-    home = "/home/${meta.whoami}";
+    home = "/home/ycg";
     isNormalUser = true;
     hashedPassword = ""; # Empty password
     # System users in NixOS don't get a login shell by default

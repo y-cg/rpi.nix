@@ -2,14 +2,13 @@
   imports = [
     ./time.nix
     ./nix.nix
-    ./general.nix
     ./packages.nix
-    ./networking
-    ./services
+    ./network.nix
+    ./openssh.nix
+    ./tailscale.nix
+    ./docker.nix
     ./users.nix
-    ./boot.nix
-    ./fs.nix
+    ./home-manager.nix
     ./bluetooth.nix
-    ../selfhost
   ];
 }
